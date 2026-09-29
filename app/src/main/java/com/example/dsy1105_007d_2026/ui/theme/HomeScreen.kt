@@ -165,21 +165,47 @@ fun HomeScreen(
                             TextButton(onClick = {showPass = !showPass}  ) {
                                 Text(if (showPass) "Ocultar" else "Ver")
                             }
-
-
                     },
                     modifier= Modifier.fillMaxWidth(0.95f)
 
-
                 )//fin Pass
+
+                if(state.error != null){
+                    Spacer(Modifier.height(8.dp))
+                    Text(
+                        text=state.error ?: "",
+                        color=MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold
+                    )
+
+                }//fin state
+
 
 
                 Spacer(modifier = Modifier.height(66.dp))
 
 
 
-                Button(onClick = {/* accion futura*/}){
-                    Text("Presioname")
+                Button(onClick = {/* accion futura*/
+                vm.submit { user ->
+                    navController.navigate("muestraDatos/$user")
+                    {//inicia navegacion
+                    popUpTo("login") {inclusive=true} //no volver al login con el back
+                        launchSingleTop
+
+                    }//fin inicia navegacion
+                }//fin submit
+
+                }, //fin oclock
+                        enabled = !state.isLoading,
+                    modifier = Modifier.fillMaxWidth(0.6f)
+
+                ){
+                    //Text("Presioname")
+
+Text(if(state.isLoading) "Validando" else "Inicio sesion")
+
+
                 } // fin boton
 
             }// fin Contenido
