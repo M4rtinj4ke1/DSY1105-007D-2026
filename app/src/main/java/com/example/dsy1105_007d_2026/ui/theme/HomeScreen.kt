@@ -188,7 +188,11 @@ fun HomeScreen(
 
                 Button(onClick = {/* accion futura*/
                 vm.submit { user ->
-                    navController.navigate("muestraDatos/$user")
+                   // navController.navigate("muestraDatos/$user")
+
+                    navController.navigate("DrawerMenu/$user")
+
+
                     {//inicia navegacion
                     popUpTo("login") {inclusive=true} //no volver al login con el back
                         launchSingleTop
